@@ -1,0 +1,11 @@
+server:
+  Application: ""
+  AppVersion: 1.0.0
+  Port: 6555
+
+logger:
+  Development: true
+  DisableCaller: false
+  DisableStacktrace: false
+  Encoding: json
+  Level: trace
