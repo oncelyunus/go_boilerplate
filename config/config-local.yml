@@ -9,3 +9,15 @@ logger:
   DisableStacktrace: false
   Encoding: json
   Level: trace
+
+mongodb:
+ hosts: localhost:27017
+ db_name: rest_api_development
+ username: guest
+ password: guest
+ timeout: 10
+ dial_timeout: 10
+ pool_size: 10
+ auth_source:
+ replica_set:
+ uri:

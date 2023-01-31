@@ -18,12 +18,21 @@ func NewApp(cfg *config.Config) (*application, error) {
 	mux := injectors.ProvideRouter(cfg)
 	server := injectors.ProvideHttpServer(cfg, mux)
 	healthCheckHandler := injectors.ProvideHealthCheck(sugaredLogger)
+	mongodbConnector, err := injectors.ProvideMongoDB(cfg, sugaredLogger)
+	if err != nil {
+		return nil, err
+	}
+	baseMongoRepo := injectors.ProvideBaseMongoRepo(cfg, mongodbConnector)
+	userRepository := injectors.ProvideUserRepository(baseMongoRepo)
+	userService := injectors.ProvideUserService(sugaredLogger, userRepository)
+	authHandler := injectors.ProvideAuthHandler(sugaredLogger, userService)
 	appApplication := &application{
 		config:             cfg,
 		logger:             sugaredLogger,
 		router:             mux,
 		httpServer:         server,
 		healthCheckHandler: healthCheckHandler,
+		authHandler:        authHandler,
 	}
 	return appApplication, nil
 }

@@ -11,8 +11,23 @@ import (
 
 // App config struct
 type Config struct {
-	Server ServerConfig `mapstructure:"server" json:"server"`
-	Logger Logger       `mapstructure:"logger" json:"logger"`
+	Server  ServerConfig  `mapstructure:"server" json:"server"`
+	Logger  Logger        `mapstructure:"logger" json:"logger"`
+	MongoDB MongodbConfig `mapstructure:"mongodb" json:"mongodb"`
+}
+
+type MongodbConfig struct {
+	DatabaseName   string `mapstructure:"db_name" json:"db_name"`
+	DatabaseHosts  string `mapstructure:"hosts" json:"hosts"`
+	TimeOut        int    `mapstructure:"timeout" json:"timeout"`
+	DialTimeOut    int64  `mapstructure:"dial_timeout" json:"dial_timeout"`
+	PoolSize       int    `mapstructure:"pool_size" json:"pool_size"`
+	Username       string `mapstructure:"username" json:"username"`
+	Password       string `mapstructure:"password" json:"password"`
+	ReplicaSet     string `mapstructure:"replica_set" json:"replica_set"`
+	AuthSource     string `mapstructure:"auth_source" json:"auth_source"`
+	URI            string `mapstructure:"uri" json:"uri"`
+	CustomIDPrefix string `mapstructure:"custom_id_prefix" json:"custom_id_prefix"`
 }
 
 // Server config struct

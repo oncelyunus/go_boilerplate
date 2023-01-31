@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/go-chi/chi"
 	"github.com/oncelyunus/go_boilerplate/config"
 	"github.com/oncelyunus/go_boilerplate/pkg/app/controller"
-	"github.com/go-chi/chi"
 	"go.uber.org/zap"
 )
 
@@ -26,6 +26,7 @@ type application struct {
 	httpServer *http.Server
 
 	healthCheckHandler *controller.HealthCheckHandler
+	authHandler        *controller.AuthHandler
 }
 
 func (app *application) Init() error {
